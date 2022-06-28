@@ -1,0 +1,49 @@
+.Meal{
+    border-bottom: 1px #f2f2f2 solid;
+    padding: 30rem 20rem;
+    display: flex;
+    /*設置輔軸對齊*/
+    align-items: center;
+}
+
+.ImgBox{
+    width: 280rem;
+}
+
+img{
+    width: 100%;
+}
+
+.DescBox{
+    flex: auto;
+}
+
+.Title{
+    font-weight: normal;
+    font-size: 40rem;
+}
+
+.Desc{
+    margin: 0;
+    width: 98%;
+    color: #bbb;
+    font-size: 24rem;
+    padding-right: 40rem;
+}
+
+.PriceWrap{
+    margin-top: 40rem;
+    padding-right: 40rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.Price{
+    font-weight: bold;
+    font-size: 36rem;
+}
+
+.Price::before{
+    content:'HK$';
+    font-size: 12px;
+}

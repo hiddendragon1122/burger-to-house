@@ -1,0 +1,40 @@
+.CheckoutItem {
+    display: flex;
+}
+
+.MealImg {
+    width: 150rem;
+}
+
+.MealImg img {
+    width: 100%;
+}
+
+.Desc {
+    flex: auto;
+    margin-left: 20rem;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+}
+
+.Title {
+    font-size: 24rem;
+
+}
+
+.PriceOuter {
+    display: flex;
+    justify-content: space-between;
+}
+
+.Price {
+    font-size: 26rem;
+    font-weight: bold;
+}
+
+.Price::before {
+    content:'HKD$';
+    font-weight: normal;
+    font-size: 24rem;
+}
