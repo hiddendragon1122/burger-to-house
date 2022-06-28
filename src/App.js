@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
 import Meals from "./components/Meals/Meals";
 import CartContext from './store/cart-Context';
 import { FilterMeals } from './components/FilterMeals/FilterMeals';
@@ -54,13 +54,46 @@ const MEALS_DATA = [
     }
 ];
 
+const cartReducer = (state, action) => {
+    const newCart = {...state}
+
+    switch (action.type){
+        default:
+            return state;
+        case 'ADD':
+            if (newCart.items.indexOf(action.meal) === -1) {
+                newCart.items.push(action.meal);
+                action.meal.amount = 1;
+            } else {
+                action.meal.amount += 1;
+            }
+            newCart.totalAmount += 1;
+            newCart.totalPrice += action.meal.price;
+            return newCart;
+        case 'REMOVE':
+            action.meal.amount -= 1;
+            if (action.meal.amount === 0) {
+                newCart.items.splice(newCart.items.indexOf(action.meal), 1);
+            }
+            newCart.totalAmount -= 1;
+            newCart.totalPrice -= action.meal.price;
+            return newCart;
+        case 'CLEAR':
+            newCart.items.forEach(item => delete item.amount);
+            newCart.items = [];
+            newCart.totalAmount = 0;
+            newCart.totalPrice = 0;
+            return newCart;
+    }
+}
+
 const App = () => {
 
     // state儲存食物列表
     const [mealsData, setMealsData] = useState(MEALS_DATA);
 
-    //state儲存購物車數據 1.商品[] 2.總數totalAmount 3.總價totalPrice
-    const [cartData, setCartData] = useState({
+    //reducer dispatch
+    const [cartData, cartDispatch] = useReducer(cartReducer,{
         items: [],
         totalAmount: 0,
         totalPrice: 0
@@ -72,55 +105,8 @@ const App = () => {
         setMealsData(newMealsData);
     }   
 
-    //向購物車添加
-    const addItem = (meal) => {
-        //對購物車進行淺複製
-        const newCart = { ...cartData };
-
-        //判斷購物車中是否已經有同樣商品
-        if (newCart.items.indexOf(meal) === -1) {
-            newCart.items.push(meal);
-            meal.amount = 1;
-        } else {
-            meal.amount += 1;
-        }
-
-        //增加總數
-        newCart.totalAmount += 1;
-        //增加總金額
-        newCart.totalPrice += meal.price;
-
-        //重新設置購物車
-        setCartData(newCart);
-    }
-
-    //減少商品數量
-    const removeItem = (meal) => {
-        const newCart = { ...cartData }
-        meal.amount -= 1;
-        //檢查數量是否歸零
-        if (meal.amount === 0) {
-            //從車中移除該商品
-            newCart.items.splice(newCart.items.indexOf(meal), 1)
-        }
-
-        //修改   總數 和 總金額
-        newCart.totalAmount -= 1;
-        newCart.totalPrice -= meal.price;
-
-        setCartData(newCart)
-    }
-
-    const clearCart = () => {
-        const newCart = {...cartData}
-        newCart.items.forEach(item => delete item.amount)
-        newCart.items = []
-        newCart.totalAmount = 0
-        newCart.totalPrice = 0
-        setCartData(newCart)
-    }
     return (
-        <CartContext.Provider value={{...cartData,addItem,removeItem,clearCart}}> 
+        <CartContext.Provider value={{...cartData,cartDispatch}}> 
             <div>
                 <FilterMeals onFilter={filterHandler}/>
                 <Meals

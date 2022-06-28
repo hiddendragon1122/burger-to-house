@@ -24,7 +24,7 @@ export const CartDetails = () => {
         setShowConfirm(false)
     }
     const okHandler = () => {
-        ctx.clearCart()
+        ctx.cartDispatch({type:'CLEAR'})
     }
 
   return (

@@ -19,11 +19,11 @@ const Counter = (props) => {
 
   //添加購物車的函數
   const addButtonHandler = () => {
-    ctx.addItem(props.meal);
+    ctx.cartDispatch({type:'Add',meal:props.meal})
   }
   //刪除食物的函數
   const subButtonHandler = () => {
-    ctx.removeItem(props.meal);
+    ctx.cartDispatch({type:'REMOVE',meal:props.meal});
   }
 
   return (
