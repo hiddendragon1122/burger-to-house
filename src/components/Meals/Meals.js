@@ -1,5 +1,5 @@
 import React from 'react';
-import Meal from '../Meal/Meal'
+import Meal from './Meal/Meal'
 import classes from './Meals.module.css'
 
 // 食物列表組件

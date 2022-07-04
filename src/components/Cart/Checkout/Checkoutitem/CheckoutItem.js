@@ -5,8 +5,8 @@ import classes from './CheckoutItem.module.css'
 export const CheckoutItem = (props) => {
   return (
     <div className={classes.CheckoutItem}>
-        <div>
-            <img className={classes.MealImg} src={props.meal.img} alt="burgers" />
+        <div className={classes.MealImg}>
+            <img  src={props.meal.img} alt="burgers" />
         </div>
         <div className={classes.Desc}>
             <h2 className={classes.Title}>{props.meal.title}</h2>

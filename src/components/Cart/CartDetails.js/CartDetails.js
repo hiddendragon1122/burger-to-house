@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import classes from './CartDetails.module.css'
 import CartContext from '../../../store/cart-Context'
-import Meal from '../../Meal/Meal'
+import Meal from '../../Meals/Meal/Meal'
 import { Confirm } from '../../UI/Confirm/Confirm'
 
 export const CartDetails = () => {
@@ -44,7 +44,7 @@ export const CartDetails = () => {
                 <div 
                     onClick={showConfirmHandler}
                     className={classes.Clear}>
-                    <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
+                    <FontAwesomeIcon icon={faTrash}/>
                     <span>清空購物車</span>
                 </div>
             </header>

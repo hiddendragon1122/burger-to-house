@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from "./Meal.module.css"
-import Counter from '../UI/Counter/Counter';
+import Counter from '../../UI/Counter/Counter';
 // 食物組件
 const Meal = (props) => {
     return (
